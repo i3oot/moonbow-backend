@@ -34,9 +34,10 @@ def pulse():
 		sleep(0.01)
 
 def clear():
+	pixels.moveToNextBuffer()
 	for led in range(0,pixels.numPixels()):
 		pixels.setPixelColor(led, 0, 0, 0)
-		pixels.show()
-		pixels.moveToNextBuffer()
+	pixels.show()
+	pixels.moveToNextBuffer()
 
 
