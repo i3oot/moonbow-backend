@@ -21,6 +21,8 @@ def play():
 			pixels.show()
 			pixels.moveToNextBuffer()
 			sleep(FRAMESLEEP)
+	except Exception as e:
+		print("EOF")
 	finally:
 		datafile.close()
 		clear()
