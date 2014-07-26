@@ -1,0 +1,10 @@
+Package: moonbow-backend
+Version: 1.0-%DATE%
+Description: Moonbow Lightpainting System
+Architecture: armv7a
+Section: extra
+Priority: optional
+Maintainer: i3oot <tobias.waller@googlemail.com>
+Homepage: https://github.com/i3oot/PixelBone
+Depends: python python-pip python-setuptools python-imageing libneopixel-python
+Source: https://github.com/i3oot/moonbow-backend
