@@ -34,13 +34,14 @@ def resize (img):
 	img.thumbnail(size, Image.ANTIALIAS)
 	
 def writeImg(img, datafile):
+	pixels = img.load()
 	width = img.size[0]
 	height = img.size[1]
 	for x in range(width):
 		for y in range(height):
 			value = pixels[x, y]
-			datafile.write(bytes(gamma[value[1]]))
 			datafile.write(bytes(gamma[value[0]]))
+			datafile.write(bytes(gamma[value[1]]))
 			datafile.write(bytes(gamma[value[2]]))
 
 
