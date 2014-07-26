@@ -10,12 +10,10 @@ def play():
 	try:
 		while(True): #breaks at eof.
 			for led in range(0,pixels.numPixels()):
-				r = datafile.read(1)
-				g = datafile.read(1)
-				b = datafile.read(1)	    
-				pixels.setPixelColor(led, r, g, b)
+				color = int(datafile.read(3))
+				pixels.setPixelColor(led, color)
 			pixels.show()
-			pixelsmoveToNextBuffer()
+			pixels.moveToNextBuffer()
 			sleep(FRAMESLEEP)
 	finally:
 		datafile.close()
