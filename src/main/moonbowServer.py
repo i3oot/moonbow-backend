@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 gamma = bytearray(256)
 for i in range(256):
-	gamma[i] = 0x80 | int(pow(float(i) / 255.0, 2.5) * 127.0 + 0.5)
+	gamma[i] = 0x00 | int(pow(float(i) / 255.0, 2.5) * 127.0 + 0.5)
 
 
 def handleImg(data):
@@ -40,9 +40,13 @@ def writeImg(img, datafile):
 	for x in range(width):
 		for y in range(height):
 			value = pixels[x, y]
-			datafile.write(bytes(gamma[value[0]]))
-			datafile.write(bytes(gamma[value[1]]))
-			datafile.write(bytes(gamma[value[2]]))
+			r = int(gamma[value[1]])
+			g = int(gamma[value[0]])
+			b = int(gamma[value[2]])	
+			#print "--> %d %d %d " % (r, g, b) 
+			datafile.write(chr(r))
+			datafile.write(chr(g))
+			datafile.write(chr(b))
 
 
 @app.route('/sprite', methods=['POST'])
