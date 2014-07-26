@@ -1,0 +1,24 @@
+from pixel import PixelBone_Pixel
+from moonbow-constants import PIXELBUFFER
+from moonbow-constants import PIXELCOUNT
+from moonbow-constants import FRAMESLEEP
+from time import sleep
+
+
+pixels = PixelBone_Pixel(PIXELCOUNT) 
+
+datafile = open(PIXELBUFFER, 'rb')	
+
+try:
+	while(true): #breaks at eof.
+		for led in range(0,neoPixelStick.numPixels()):
+			r = datafile.read(1)
+			g = datafile.read(1)
+			b = datafile.read(1)	    
+			pixels.setPixelColor(led, r, g, b)
+		pixels.show()
+		pixelsmoveToNextBuffer()
+		sleep(FRAMESLEEP)
+finally:
+	datafile.close()
+

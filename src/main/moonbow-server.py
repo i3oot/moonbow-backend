@@ -2,11 +2,12 @@ from flask import Flask
 from flask import json
 from flask import request
 from base64 import b64decode
+from moonbow-constants import PIXELBUFFER
+from moonbow-constants import PIXELCOUNT
 import Image, cStringIO, os
 
 app = Flask(__name__)
 
-maxheight = int(os.environ['PIXELS'])
 gamma = bytearray(256)
 for i in range(256):
 	gamma[i] = 0x80 | int(pow(float(i) / 255.0, 2.5) * 127.0 + 0.5)
@@ -19,13 +20,13 @@ def handleImg(data):
 	height = img.size[1]
 	app.logger.info("Got Sprite. Dimension: %dx%d pixels" % img.size)
 	
-	if(height > maxheight):
+	if(height > PIXELCOUNT):
 		app.logger.debug("Sprite is larger than %d in height. Resizing..." % maxheight)	
-		size = maxheight, (maxheight/height)*width	        
+		size = maxheight, (PIXELCOUNT/height)*width	        
 		img.thumbnail(size, Image.ANTIALIAS)
 
 	app.logger.debug("Writing converted bytes")
-	datafile = open('/tmp/pixelbuffer', 'wb')	
+	datafile = open(PIXELBUFFER, 'wb')	
 	for x in range(width):
 		for y in range(height):
 			value = pixels[x, y]
