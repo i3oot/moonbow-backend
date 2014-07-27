@@ -31,7 +31,8 @@ def handleImg(data):
 	
 def resize (img):
 	app.logger.debug("Sprite is larger than %d in height. Resizing..." % PIXELCOUNT)	
-	size = PIXELCOUNT, (PIXELCOUNT/img.size[1])*img.size[0]	        
+	size = PIXELCOUNT, PIXELCOUNT*img.size[0]/img.size[1]	        
+	print size
 	img.thumbnail(size, Image.ANTIALIAS)
 	
 def writeImg(img, datafile):
@@ -44,7 +45,7 @@ def writeImg(img, datafile):
 			r = int(gamma[value[1]])
 			g = int(gamma[value[0]])
 			b = int(gamma[value[2]])	
-			#print "--> %d %d %d " % (r, g, b) 
+			print "--> %d %d %d " % (r, g, b) 
 			datafile.write(chr(r))
 			datafile.write(chr(g))
 			datafile.write(chr(b))
