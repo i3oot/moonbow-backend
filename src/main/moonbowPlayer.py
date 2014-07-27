@@ -22,5 +22,12 @@ def play():
 			sleep(FRAMESLEEP)
 	finally:
 		datafile.close()
+		clear()
 
+
+def clear():
+	for led in range(0,pixels.numPixels()):
+		pixels.setPixelColor(led, 0, 0, 0)
+		pixels.show()
+		pixels.moveToNextBuffer()
 
