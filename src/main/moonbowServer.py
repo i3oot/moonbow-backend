@@ -59,6 +59,6 @@ def sprite():
 	return "ok"   
 
 if __name__ == '__main__':
-    app.run(DEBUG)
+    app.run(debug=DEBUG)
 
 
