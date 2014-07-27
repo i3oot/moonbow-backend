@@ -4,6 +4,7 @@ from flask import request
 from base64 import b64decode
 from moonbowConstants import PIXELBUFFER
 from moonbowConstants import PIXELCOUNT
+from moonbowConstants import DEBUG
 import Image, cStringIO, os
 
 app = Flask(__name__)
@@ -58,6 +59,6 @@ def sprite():
 	return "ok"   
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(DEBUG)
 
 
