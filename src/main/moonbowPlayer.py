@@ -5,8 +5,9 @@ from moonbowConstants import FRAMESLEEP
 from time import sleep
 import struct
 
+pixels = PixelBone_Pixel(PIXELCOUNT) 
+
 def play():
-	pixels = PixelBone_Pixel(PIXELCOUNT) 
 	datafile = open(PIXELBUFFER, 'rb')	
 	try:
 		while(True): #breaks at eof.
