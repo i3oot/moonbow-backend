@@ -1,5 +1,8 @@
-import os
+import ConfigParser
+Config = ConfigParser.ConfigParser()
+Config.read("/etc/moonbow/backend.ini")
 
-PIXELBUFFER = '/tmp/pixelbuffer'
-PIXELCOUNT = int(os.environ['PIXELS'])
-FRAMESLEEP = 1 
+
+PIXELBUFFER = Config.get('Server', 'bufferfile', '/tmp/pixelbuffer')
+PIXELCOUNT = int(Config.get('Graphics','pixelcount'))
+FRAMESLEEP = Config.get('Graphics','framesleep', 0.5)
