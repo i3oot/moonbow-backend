@@ -31,7 +31,7 @@ def handleImg(data):
 	
 def resize (img):
 	app.logger.debug("Sprite is larger than %d in height. Resizing..." % maxheight)	
-	size = maxheight, (PIXELCOUNT/height)*width	        
+	size = PIXELCOUNT, (PIXELCOUNT/height)*width	        
 	img.thumbnail(size, Image.ANTIALIAS)
 	
 def writeImg(img, datafile):
