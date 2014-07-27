@@ -6,5 +6,5 @@ Section: extra
 Priority: optional
 Maintainer: i3oot <tobias.waller@googlemail.com>
 Homepage: https://github.com/i3oot/PixelBone
-Depends: python python-pip python-setuptools python-imageing libneopixel-python
+Depends: python python-pip python-setuptools python-imageing libneopixel-python supervisord
 Source: https://github.com/i3oot/moonbow-backend
