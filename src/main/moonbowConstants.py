@@ -7,4 +7,4 @@ PIXELBUFFER = Config.get('Server', 'bufferfile', '/tmp/pixelbuffer')
 DEBUG = Config.get('Server', 'debug', False)
 
 PIXELCOUNT = int(Config.get('Graphics','pixelcount'))
-FRAMESLEEP = Config.get('Graphics','frameduration', 0.5)
+FRAMESLEEP = float(Config.get('Graphics','frameduration', 0.5))
