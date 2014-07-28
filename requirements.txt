@@ -1,1 +1,3 @@
 Flask==0.8
+distribute
+Adafruit_BBIO==0.0.20
