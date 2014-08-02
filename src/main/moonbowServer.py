@@ -3,6 +3,7 @@ from flask import json
 from flask import request
 from base64 import b64decode
 from moonbowConstants import PIXELBUFFER
+from moonbowConstants import IMGIDFILE
 from moonbowConstants import PIXELCOUNT
 from moonbowConstants import DEBUG
 import Image, cStringIO, os
@@ -50,14 +51,29 @@ def writeImg(img, datafile):
 			datafile.write(chr(g))
 			datafile.write(chr(b))
 
+def writeId(id):
+	datafile = open(IMGIDFILE, 'w')	
+	datafile.write(id)
+	datafile.close()
+	
+def readId():
+	datafile = open(IMGIDFILE, 'r')	
+	id = datafile.readline()
+	datafile.close()
+	return id
 
 @app.route('/sprite', methods=['POST'])
-def sprite():
+def storeSprite():
 	msg = request.json
 	app.logger.debug("Request: " + json.dumps(msg))
 	img = b64decode(msg['data'])
 	handleImg(img)
-	return "ok"   
+	writeId(msg['id'])
+	return "ok"
+
+@app.route('/sprite', methods=['GET'])
+def readSprite():
+   return readId()
 
 if __name__ == '__main__':
     app.run(debug=DEBUG, host='0.0.0.0')

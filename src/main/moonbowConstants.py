@@ -3,7 +3,8 @@ Config = ConfigParser.ConfigParser()
 Config.read("/etc/moonbow/backend.ini")
 
 
-PIXELBUFFER = Config.get('Server', 'bufferfile', '/tmp/pixelbuffer')
+PIXELBUFFER = Config.get('Server', 'bufferfile', '/etc/moonbow/pixelbuffer')
+IMGIDFILE = Config.get('Server', 'imgidfile', '/etc/moonbow/img.id')
 DEBUG = Config.get('Server', 'debug', False)
 
 PIXELCOUNT = int(Config.get('Graphics','pixelcount'))
