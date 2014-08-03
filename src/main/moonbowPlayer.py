@@ -32,4 +32,4 @@ def clear():
 		pixels.show()
 		pixels.moveToNextBuffer()
 
-play()
+

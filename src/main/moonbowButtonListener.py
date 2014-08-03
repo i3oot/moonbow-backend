@@ -1,7 +1,7 @@
 import Adafruit_BBIO.GPIO as GPIO
 from moonbowPlayer import play
 
-buttonPin = "P8_14"
+buttonPin = "P8_19"
 GPIO.setup(buttonPin, GPIO.IN)
 
 while(True):
