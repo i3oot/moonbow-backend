@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/sprite', methods=['POST'])
 @cross_origin(headers=['Content-Type'])
-def storeSprite():
+def spritePost():
 	msg = request.json
 	app.logger.debug("Request: " + json.dumps(msg))
 	img = b64decode(msg['data'])
@@ -16,7 +16,7 @@ def storeSprite():
 
 @app.route('/sprite', methods=['GET', 'OPTIONS'])
 @cross_origin(headers=['Content-Type'])
-def readSprite():
+def spriteGet():
    return readId()
 
 if __name__ == '__main__':
