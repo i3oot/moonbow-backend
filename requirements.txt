@@ -1,3 +1,4 @@
 Flask==0.8
+flask-cors
 distribute
 Adafruit_BBIO==0.0.20

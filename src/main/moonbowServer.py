@@ -7,6 +7,7 @@ from moonbowConstants import IMGIDFILE
 from moonbowConstants import PIXELCOUNT
 from moonbowConstants import DEBUG
 import Image, cStringIO, os
+from flask.ext.cors import cross_origin
 
 app = Flask(__name__)
 
@@ -63,6 +64,7 @@ def readId():
 	return id
 
 @app.route('/sprite', methods=['POST'])
+@cross_origin(headers=['Content-Type'])
 def storeSprite():
 	msg = request.json
 	app.logger.debug("Request: " + json.dumps(msg))
@@ -71,7 +73,8 @@ def storeSprite():
 	writeId(msg['id'])
 	return "ok"
 
-@app.route('/sprite', methods=['GET'])
+@app.route('/sprite', methods=['GET', 'OPTIONS'])
+@cross_origin(headers=['Content-Type'])
 def readSprite():
    return readId()
 
