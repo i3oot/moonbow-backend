@@ -1,7 +1,7 @@
 from flask import Flask, json, request
 from flask.ext.cors import cross_origin
 from base64 import b64decode
-from sprite import storeImage, readId
+import sprite, settings
 
 app = Flask(__name__)
 
@@ -12,12 +12,28 @@ def spritePost():
 	app.logger.debug("Request: " + json.dumps(msg))
 	img = b64decode(msg['data'])
 	storeImage(msg['id'], img)
-	return "ok"
+	return sprite.readId()
 
 @app.route('/sprite', methods=['GET', 'OPTIONS'])
 @cross_origin(headers=['Content-Type'])
 def spriteGet():
-   return readId()
+   return sprite.readId()
+
+@app.route('/settings/framesleep', methods=['POST'])
+@cross_origin(headers=['Content-Type'])
+def framesleepPost():
+	msg = request.json
+	app.logger.debug("Request: " + json.dumps(msg))
+	newvalue = msg['framesleep']
+	app.logger.debug("New Framesleep value: " + newvalue)
+	return settings.framesleep(newvalue)
+
+@app.route('/settings/framesleep', methods=['GET', 'OPTIONS'])
+@cross_origin(headers=['Content-Type'])
+def framesleepGet():
+	return settings.framesleep()
+
+
 
 if __name__ == '__main__':
     app.run(debug=DEBUG, host='0.0.0.0')

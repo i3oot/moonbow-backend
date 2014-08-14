@@ -1,5 +1,4 @@
-from moonbowConstants import *
-import Image, cStringIO, os
+import Image, cStringIO, os, settings
 
 gamma = bytearray(256)
 for i in range(256):
@@ -10,7 +9,7 @@ def storeImage(id, name):
 	writeId(id)
 
 def readId():
-	datafile = open(IMGIDFILE, 'r')	
+	datafile = open(settings.IMGIDFILE, 'r')	
 	id = datafile.readline()
 	datafile.close()
 	return id
@@ -22,17 +21,17 @@ def handleImg(data):
 	height = img.size[1]
 	app.logger.info("Got Sprite. Dimension: %dx%d pixels" % img.size)
 	
-	if(height > PIXELCOUNT):
+	if(height > settings.PIXELCOUNT):
 		resize(img)
 
 	app.logger.debug("Writing converted bytes")
-	datafile = open(PIXELBUFFER, 'wb')	
+	datafile = open(settings.PIXELBUFFER, 'wb')	
 	writeImg(img, datafile)
 	datafile.close()
 	
 def resize (img):
 	app.logger.debug("Sprite is larger than %d in height. Resizing..." % PIXELCOUNT)	
-	size = PIXELCOUNT, PIXELCOUNT*img.size[0]/img.size[1]	        
+	size = settings.PIXELCOUNT, settings.PIXELCOUNT*img.size[0]/img.size[1]	        
 	print size
 	img.thumbnail(size, Image.ANTIALIAS)
 	
@@ -52,7 +51,7 @@ def writeImg(img, datafile):
 			datafile.write(chr(b))
 
 def writeId(id):
-	datafile = open(IMGIDFILE, 'w')	
+	datafile = open(settings.IMGIDFILE, 'w')	
 	datafile.write(id)
 	datafile.close()
 	
