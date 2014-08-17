@@ -1,14 +1,11 @@
 from pixel import PixelBone_Pixel
-from moonbowConstants import PIXELBUFFER
-from moonbowConstants import PIXELCOUNT
-from moonbowConstants import FRAMESLEEP
 from time import sleep
-import struct
+import struct, settings
 
-pixels = PixelBone_Pixel(PIXELCOUNT) 
+pixels = PixelBone_Pixel(settings.PIXELCOUNT) 
 
 def play():
-	datafile = open(PIXELBUFFER, 'rb')	
+	datafile = open(settings.PIXELBUFFER, 'rb')	
 	try:
 		while(True): #breaks at eof.
 			for led in range(0,pixels.numPixels()):
@@ -20,7 +17,7 @@ def play():
 				pixels.setPixelColor(led, r,g,b)
 			pixels.show()
 			pixels.moveToNextBuffer()
-			sleep(FRAMESLEEP)
+			sleep(settings.framesleep())
 	except Exception as e:
 		print("EOF")
 	finally:
