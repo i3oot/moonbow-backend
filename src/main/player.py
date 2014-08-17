@@ -1,6 +1,6 @@
 from pixel import PixelBone_Pixel
 from time import sleep
-import struct, settings
+import struct, settings, numpy, math
 
 pixels = PixelBone_Pixel(settings.PIXELCOUNT) 
 
@@ -25,12 +25,13 @@ def play():
 		clear()
 
 def pulse():
-	for i in range(0, 2*3.14, 0.05):
-		intensity = int(sin(i) * 255);
+	for i in numpy.arange(0, 2*math.pi, 0.05):
+		intensity = int(math.pow(math.fabs(math.sin(i)), 2.5) * 60);
 		for led in range(0,pixels.numPixels()):
 			pixels.setPixelColor(led, intensity, intensity, intensity);
-			sleep(0.05)
-	clear()
+		pixels.show()
+		pixels.moveToNextBuffer()
+		sleep(0.01)
 
 def clear():
 	for led in range(0,pixels.numPixels()):
