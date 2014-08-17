@@ -36,12 +36,12 @@ def resize (img):
 	img.thumbnail(size, Image.ANTIALIAS)
 	
 def writeImg(img, datafile):
-	pixels = img.convert('RGB')
+	rgbimg = img.convert('RGB')
 	width = img.size[0]
 	height = img.size[1]
 	for x in range(width):
 		for y in range(height):
-			r,g,b = pixels[x, y]
+			r,g,b = rgbimg.getpixel((x,y))
 			#print "--> %d %d %d " % (r, g, b) 
 			datafile.write(chr(r))
 			datafile.write(chr(g))
