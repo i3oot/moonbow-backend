@@ -11,7 +11,7 @@ def spritePost():
 	msg = request.json
 	app.logger.debug("Request: " + json.dumps(msg))
 	img = b64decode(msg['data'])
-	storeImage(msg['id'], img)
+	sprite.storeImage(msg['id'], img)
 	return sprite.readId()
 
 @app.route('/sprite', methods=['GET', 'OPTIONS'])

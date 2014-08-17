@@ -1,10 +1,10 @@
 import Image, cStringIO, os, settings
 
-gamma = bytearray(256)
-for i in range(256):
-	gamma[i] = 0x00 | int(pow(float(i) / 255.0, 2.5) * 127.0 + 0.5)
+#gamma = bytearray(256)
+#for i in range(256):
+#	gamma[i] = 0x00 | int(pow(float(i) / 255.0, 2.5) * 127.0 + 0.5)
 
-def storeImage(id, name):
+def storeImage(id, data):
 	handleImg(data)
 	writeId(id)
 
@@ -19,33 +19,30 @@ def handleImg(data):
 	pixels = img.load()
 	width = img.size[0]
 	height = img.size[1]
-	app.logger.info("Got Sprite. Dimension: %dx%d pixels" % img.size)
+	#app.logger.info("Got Sprite. Dimension: %dx%d pixels" % img.size)
 	
 	if(height > settings.PIXELCOUNT):
 		resize(img)
 
-	app.logger.debug("Writing converted bytes")
+	#app.logger.debug("Writing converted bytes")
 	datafile = open(settings.PIXELBUFFER, 'wb')	
 	writeImg(img, datafile)
 	datafile.close()
 	
 def resize (img):
-	app.logger.debug("Sprite is larger than %d in height. Resizing..." % PIXELCOUNT)	
+	#app.logger.debug("Sprite is larger than %d in height. Resizing..." % PIXELCOUNT)	
 	size = settings.PIXELCOUNT, settings.PIXELCOUNT*img.size[0]/img.size[1]	        
 	print size
 	img.thumbnail(size, Image.ANTIALIAS)
 	
 def writeImg(img, datafile):
-	pixels = img.load()
+	pixels = img.convert('RGB')
 	width = img.size[0]
 	height = img.size[1]
 	for x in range(width):
 		for y in range(height):
-			value = pixels[x, y]
-			r = int(gamma[value[1]])
-			g = int(gamma[value[0]])
-			b = int(gamma[value[2]])	
-			print "--> %d %d %d " % (r, g, b) 
+			r,g,b = pixels[x, y]
+			#print "--> %d %d %d " % (r, g, b) 
 			datafile.write(chr(r))
 			datafile.write(chr(g))
 			datafile.write(chr(b))
