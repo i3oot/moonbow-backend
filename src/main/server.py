@@ -1,7 +1,7 @@
 from flask import Flask, json, request
 from flask.ext.cors import cross_origin
 from base64 import b64decode
-import sprite, settings
+import sprite, settings, player
 
 app = Flask(__name__)
 
@@ -37,5 +37,5 @@ def framesleepGet():
 
 if __name__ == '__main__':
     app.run(debug=settings.DEBUG, host='0.0.0.0')
-
+    player.pulse()
 

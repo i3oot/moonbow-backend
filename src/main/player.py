@@ -24,6 +24,13 @@ def play():
 		datafile.close()
 		clear()
 
+def pulse():
+	for i in range(0, 2*3.14, 0.05):
+		intensity = int(sin(i) * 255);
+		for led in range(0,pixels.numPixels()):
+			pixels.setPixelColor(led, intensity, intensity, intensity);
+			sleep(0.05)
+	clear()
 
 def clear():
 	for led in range(0,pixels.numPixels()):
